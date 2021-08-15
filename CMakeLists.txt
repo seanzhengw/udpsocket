@@ -36,3 +36,7 @@ install(
     ARCHIVE DESTINATION lib/static
     PUBLIC_HEADER DESTINATION include/udpsocket
 )
+
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
