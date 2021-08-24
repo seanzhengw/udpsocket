@@ -23,6 +23,8 @@ class UDPSocket {
 
     int close();
 
+    operator int();
+
   private:
     void *data;
 };

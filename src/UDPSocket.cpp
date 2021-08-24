@@ -87,3 +87,7 @@ ssize_t UDPSocket::recvfrom(void *__restrict__ buf, size_t len,
 int UDPSocket::close() {
     return ::close(SOCKFD);
 }
+
+UDPSocket::operator int() {
+    return SOCKFD;
+}
