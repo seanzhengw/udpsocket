@@ -22,6 +22,12 @@ target_include_directories(udpsocket_shared PUBLIC include/)
 add_library(udpsocket STATIC $<TARGET_OBJECTS:udpsocket_obj>)
 target_include_directories(udpsocket PUBLIC include/)
 
+if(WIN32)
+target_link_libraries(udpsocket_obj PUBLIC ws2_32)
+target_link_libraries(udpsocket_shared PUBLIC ws2_32)
+target_link_libraries(udpsocket PUBLIC ws2_32)
+endif()
+
 # public headers
 set(UDPSOCKET_HEADERS 
     include/udpsocket/SockAddr.h 
