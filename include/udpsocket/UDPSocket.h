@@ -4,6 +4,7 @@
 #include <sys/types.h>
 
 #include "SockAddr.h"
+#include "corss.h"
 
 class UDPSocket {
   public:
@@ -15,15 +16,15 @@ class UDPSocket {
 
     int bind(int port);
 
-    ssize_t sendto(const void *buf, size_t len, const SockAddr &addr);
+    ssize_t sendto(const void *buf, data_size_t len, const SockAddr &addr);
 
-    ssize_t recvfrom(void *__restrict__ buf, size_t len,
+    ssize_t recvfrom(void *__restrict__ buf, data_size_t len,
                      SockAddr *__restrict__ addr);
-    ssize_t recvfrom(void *__restrict__ buf, size_t len, SockAddr &addr);
+    ssize_t recvfrom(void *__restrict__ buf, data_size_t len, SockAddr &addr);
 
     int close();
 
-    operator int();
+    operator sockfd_t();
 
   private:
     void *data;

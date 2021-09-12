@@ -1,7 +1,14 @@
 #include "udpsocket/SockAddr.h"
 
-#include <arpa/inet.h>
 #include <memory.h>
+
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2ipdef.h>
+#include <ws2tcpip.h>
+#else
+#include <arpa/inet.h>
+#endif
 
 SockAddr::SockAddr()
     : data(new char[sizeof(sockaddr_in6)]), len(sizeof(sockaddr_in6)) {
