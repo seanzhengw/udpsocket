@@ -98,12 +98,9 @@ ssize_t UDPSocket::recvfrom(void *__restrict__ buf, data_size_t len,
 
 ssize_t UDPSocket::recvfrom(void *__restrict__ buf, data_size_t len,
                             SockAddr &addr) {
-    sockaddr_storage ra;
-    socklen_t ral = sizeof(sockaddr_storage);
-    auto r =
-        ::recvfrom(SOCKFD, (data_t *)buf, len, 0, (sockaddr *)(&ra), &(ral));
-    addr.set(&ra, ral);
-    return r;
+    sockaddr *sa = (sockaddr *)((addr.data));
+    fromlen_t *flen = (fromlen_t *)(&(addr.len));
+    return ::recvfrom(SOCKFD, (data_t *)buf, len, 0, sa, flen);
 }
 
 int UDPSocket::close() {
