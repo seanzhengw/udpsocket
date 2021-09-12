@@ -2,12 +2,21 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "udpsocket/UDPSocket.h"
+#ifdef _WIN32
+#include <WinSock2.h>
+#endif
+
+#include <udpsocket/UDPSocket.h>
 
 #define MYPORT 8888
 
 void err_exit(const char *tag) {
+#ifdef _WIN32
+    int e = WSAGetLastError();
+    fprintf(stderr, "%s: %d", tag, e);
+#else
     perror(tag);
+#endif
     exit(EXIT_FAILURE);
 }
 
